@@ -1,0 +1,147 @@
+#encabezado {
+	background-color:#48D1CC;
+	color: #191970;
+	font-family: 'Baloo Bhaijaan';
+	text-align: center;
+	height: 130px;
+	
+}
+
+
+
+.fondo {
+     
+	    position: relative;
+		max-width: 100%;
+     max-height: 100%;
+}
+	
+.links {
+	background-color: #F5F5F5;
+	font-family: 'Mukta';
+}
+
+#encabezado-tipo {
+	font-size: 70px;
+	
+}
+
+#formulario-exp{
+	display: inline;
+}
+
+#texto {
+	height: 550px;
+	width: 550px;
+}
+
+
+#casa {
+	
+	position: absolute;
+	left: 500px;
+	top: 500px;
+	z-index: 1;
+	cursor: pointer;
+}
+
+#escuelaImg {
+	
+	position: absolute;
+	left: 700px;
+	top: 400px;
+	z-index: 1;
+	cursor: pointer;
+}
+
+
+.recuadro {
+	
+	background-color:#48D1CC;
+	border-radius: 25px;
+}
+
+.recuadro2 {
+	
+	background-color:#48D1CC;
+	
+}
+
+#footer {
+	background-color:#48D1CC;
+	color: #191970;
+	height: 70px;
+	font-family: 'Bitter';
+
+}
+
+
+.negrita {
+	font-weight: bold;
+}
+
+li {
+	font-weight: bold;
+}
+
+ .sol img {
+    width: 200px;
+    height: 200px;
+   animation: sol 5s linear infinite;
+		  -moz-animation: sol 5s linear infinite;
+		  /* Firefox */
+		  -webkit-animation: sol 5s linear infinite;
+		  /* Safari and Chrome */
+		  -o-animation: sol 5s linear infinite;
+		  /* Opera */
+   position: absolute;
+   top: 200px;
+   right: 300px;
+   z-index:10;
+}
+
+@keyframes sol {
+  		from {
+  			transform: rotate(0deg);
+  		}
+  		to {
+  			transform: rotate(-360deg);
+  		}
+	}
+
+.listacentros {
+	color: #191970;
+	font-weight: bold;
+}
+
+.listacentros2 {
+	color: #191970;
+	font-weight: bold;
+	font-style: italic;
+}
+.espacio {
+	height: 380px;
+}
+
+.top-buffer { 
+	margin-top:20px;
+ }
+ 
+#solo {
+	height:400px;
+	width: 500px;
+}
+
+#stop {
+	margin-top: 130px;
+	width: 500px;
+	height:500px:
+}
+
+.fondo2{
+	background-color: #48D1CC;
+}
+
+.cerrar {
+	margin: 5px;
+}
