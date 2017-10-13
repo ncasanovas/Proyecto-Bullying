@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.model.Centro;
-import com.example.model.Experiencia;
-import com.example.model.Positivo;
+
 
 @Controller
 public class BullyingController {
@@ -52,7 +50,7 @@ public class BullyingController {
 	static public String experiencias(Model template) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		PreparedStatement ps = connection.prepareStatement(
 				  "SELECT id, usuario, avatar, comentario FROM experiencias");
@@ -90,7 +88,7 @@ public class BullyingController {
 	static public String recepcion(Model template, @RequestParam String usuario, @RequestParam String avatar, @RequestParam String comentario) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		
 		
@@ -158,7 +156,7 @@ public class BullyingController {
 	static public String pensamientosPositivos(Model template) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		
 		PreparedStatement ps = connection.prepareStatement(
@@ -195,7 +193,7 @@ public class BullyingController {
 	static public String agregar(Model template, @RequestParam String usuario, @RequestParam String imagen) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		
 		PreparedStatement ps2 = connection.prepareStatement(
@@ -261,7 +259,7 @@ public class BullyingController {
 	static public String centrosget(Model template) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		PreparedStatement ps = connection.prepareStatement(
 				"SELECT id, nombre, descripcion, direccion FROM centros");
@@ -295,7 +293,7 @@ public class BullyingController {
 	static public String centrospost(Model template, @RequestParam String nombre, @RequestParam String descripcion, @RequestParam String direccion, HttpServletRequest request) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO centros(nombre, descripcion, direccion)"
@@ -360,7 +358,7 @@ public class BullyingController {
 	static public String recepcion(Model template, @RequestParam String mail, @RequestParam String comentario) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		
 		
@@ -400,7 +398,7 @@ public class BullyingController {
 		if(codigo == null) { return 0; }
 
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		PreparedStatement ps = connection.prepareStatement(
 				  "SELECT id, usuarioc FROM usuarios WHERE codigo = ?;");
@@ -430,7 +428,7 @@ public class BullyingController {
 			@RequestParam String usuarioc, 
 			@RequestParam String password) throws SQLException {
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		if (usuarioc.equals("") || password.equals("")) {
 			template.addAttribute("errorUsuario", "Usuario o contrasenia vacío");
@@ -480,7 +478,7 @@ public class BullyingController {
 	public static String procesarRegistro(@RequestParam String usuarioc, @RequestParam int password, Model template) throws SQLException {
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto_comit", "postgres", "admin");
+		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
 		PreparedStatement ps = connection.prepareStatement(
 				"SELECT * FROM usuarios WHERE (usuarioc=?)");
