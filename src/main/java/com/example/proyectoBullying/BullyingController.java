@@ -49,12 +49,16 @@ public class BullyingController {
 	@GetMapping("/experiencias")
 	static public String experiencias(Model template) throws SQLException {
 		
+		//Se conecta a la base de datos
 		Connection connection;
 		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
+		//Arma la consulta
 		PreparedStatement ps = connection.prepareStatement(
 				  "SELECT id, usuario, avatar, comentario FROM experiencias");
 		
+
+		//Ejecuta
 		ResultSet result = ps.executeQuery();
 		
 				
@@ -63,7 +67,7 @@ public class BullyingController {
 		listaExperiencias = new ArrayList<Experiencia>();
 				
 		
-		
+		//Mientras haya proxima experiencia, ingresarla en la lista.
 		while ( result.next() ) {
 			Experiencia e = new Experiencia(
 					
@@ -76,6 +80,7 @@ public class BullyingController {
 			listaExperiencias.add(e);
 			
 		}
+		
 		template.addAttribute( "experiencias", listaExperiencias );
 		
 		connection.close();
@@ -84,21 +89,19 @@ public class BullyingController {
 		return "experiencias";
 	}
 	
+	
 	@PostMapping("/experiencias")
 	static public String recepcion(Model template, @RequestParam String usuario, @RequestParam String avatar, @RequestParam String comentario) throws SQLException {
 		
 		Connection connection;
 		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
-		
-		
-		
-			
-				
+						
 		PreparedStatement ps2 = connection.prepareStatement(
 				"INSERT INTO experiencias(usuario, avatar, comentario)"
 						+ "VALUES(?,?,?)");
-						
-		ps2.setString(1, usuario); 
+				
+		//Rellena los ?, del statement
+		ps2.setString(1, usuario); //Para insertar datos variables con el path. 1 la posicion del "?".
 		ps2.setString(2, avatar);
 		ps2.setString(3, comentario);
 		
@@ -140,6 +143,7 @@ public class BullyingController {
 			listaExperiencias.add(e);
 			
 		}
+		
 		template.addAttribute( "experiencias", listaExperiencias );
 		
 		if(!(avatar.equals(""))) {
@@ -360,10 +364,7 @@ public class BullyingController {
 		Connection connection;
 		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
-		
-		
-			
-				
+						
 		PreparedStatement ps = connection.prepareStatement(
 				"INSERT INTO contacto(mail, comentario)"
 						+ "VALUES(?,?)");
@@ -405,16 +406,19 @@ public class BullyingController {
 		ps.setString(1, codigo);
 		ResultSet result = ps.executeQuery();
 		
+		
 		if ( result.next() ) {
 			return result.getInt("id"); // usa como una ruta	
 		}
 		return 0;
 	}
 	
+	
 	@GetMapping("/login")
 	public static String login() {
 		return "login";
 	}
+	
 	
 	@GetMapping("/cerrarSesion")
 	public static String logout(HttpServletRequest request) {
@@ -422,6 +426,7 @@ public class BullyingController {
 		session.setAttribute("codigo", null);
 		return "login";
 	}
+	
 	
 	@PostMapping("/login")
 	public static String procesarLogin(HttpServletRequest request, Model template, 
@@ -461,18 +466,15 @@ public class BullyingController {
 			return "login";	
 		}
 		
-		
-		
-		
 	}
 	
 	
 	@GetMapping("/registro")
 	public static String registro(Model template) {
 		return "registro";
-		
-		
+			
 	}
+	
 	
 	@PostMapping("/procesarRegistro")
 	public static String procesarRegistro(@RequestParam String usuarioc, @RequestParam int password, Model template) throws SQLException {
@@ -521,6 +523,8 @@ public class BullyingController {
 		}
 		return "centrosagregar";
 	}
+	
+	
 	@PostMapping("/centrosagregar")
 	public static String agregarCentros(HttpServletRequest request) throws SQLException {
 		int id= obtenerUsuario(request);
