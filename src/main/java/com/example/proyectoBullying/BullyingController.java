@@ -431,7 +431,7 @@ public class BullyingController {
 	@PostMapping("/login")
 	public static String procesarLogin(HttpServletRequest request, Model template, 
 			@RequestParam String usuarioc, 
-			@RequestParam String password) throws SQLException {
+			@RequestParam Integer password) throws SQLException {
 		Connection connection;
 		connection = DriverManager.getConnection("jdbc:postgresql://" + Settings.HOSTNAME + ":5432/" + Settings.DB_NAME, Settings.USER, Settings.PASSWORD);
 		
@@ -443,7 +443,7 @@ public class BullyingController {
 		PreparedStatement ps = connection.prepareStatement(
 				  "SELECT id, usuarioc FROM usuarios WHERE usuarioc = ? AND password = ?;");
 		ps.setString(1, usuarioc);
-		ps.setString(2, password);
+		ps.setInt(2, password);
 		
 		ResultSet result = ps.executeQuery();
 		
@@ -457,12 +457,13 @@ public class BullyingController {
 					  "UPDATE usuarios SET codigo = ? WHERE usuarioc = ? AND password = ?;");
 			ps.setString(1, nuevoCodigo);
 			ps.setString(2, usuarioc);
-			ps.setString(3, password);
+			ps.setInt(3, password);
 			ps.executeUpdate();
 			
 			return "redirect:/centrosagregar"; // usa como una ruta	
 		} else {
 			template.addAttribute("mensajeError", "Usuario o contrasenia no valida");
+			
 			return "login";	
 		}
 		
