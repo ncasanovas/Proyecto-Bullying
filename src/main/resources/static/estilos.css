@@ -145,3 +145,8 @@ li {
 .cerrar {
 	margin: 5px;
 }
+
+${gracias}{
+  color: blue;
+  font-size: 20px;
+}
